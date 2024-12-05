@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  tasks:
+   - name: Deleting all users
+     user:
+      - name: myuser123
+        state: absent
+   - name: Deleting another user
+     user: name=myuser125 state=absent shell=/bin/sh
