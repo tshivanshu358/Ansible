@@ -1,0 +1,22 @@
+---
+
+- name: Play 1
+  hosts: localhost
+  gather_facts: no
+  tasks:
+   - name: Execute command "date"
+     command: date
+   - name: Execute script on server
+     script: test_script.sh
+     ignore_errors: yes
+
+   - name: Install httpd on server
+     dnf:
+      - name: httpd
+        state: present
+
+   - name: Start Web service
+     service:
+       name: httpd
+       state: present
+       enabled: yes
