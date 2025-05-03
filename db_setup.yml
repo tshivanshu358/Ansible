@@ -1,0 +1,17 @@
+- name: Install and configure PostgreSQL
+  hosts: db
+  become: true
+  tasks:
+    - name: Install PostgreSQL
+      apt:
+        name: postgresql
+        state: present
+
+    - name: Ensure DB and user exist
+      become_user: postgres
+      postgresql_db:
+        name: mydb
+      postgresql_user:
+        name: dbuser
+        password: secret
+        priv: "ALL"
