@@ -1,0 +1,15 @@
+- name: Set up log rotation
+  hosts: all
+  become: true
+  tasks:
+    - name: Configure logrotate for app logs
+      copy:
+        dest: /etc/logrotate.d/myapp
+        content: |
+          /var/log/myapp/*.log {
+              daily
+              rotate 7
+              compress
+              missingok
+              notifempty
+          }
