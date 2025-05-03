@@ -1,0 +1,20 @@
+- name: Install RabbitMQ
+  hosts: rabbitmq
+  become: true
+  tasks:
+    - name: Install Erlang
+      apt:
+        name: erlang
+        state: present
+        update_cache: yes
+
+    - name: Install RabbitMQ Server
+      apt:
+        name: rabbitmq-server
+        state: present
+
+    - name: Ensure RabbitMQ is running
+      service:
+        name: rabbitmq-server
+        state: started
+        enabled: yes
